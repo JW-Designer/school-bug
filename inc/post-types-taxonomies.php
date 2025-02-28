@@ -1,7 +1,7 @@
 <?php
-function school_bug_register_custom_post_types() {
+function schoolbug_register_custom_post_types() {
     // Register Work Category Taxonomy
-    function school_bug_register_taxonomies() {
+    function schoolbug_register_taxonomies() {
         $labels = array(
             'name'              => _x( 'Work Categories', 'taxonomy general name', 'school-bug' ),
             'singular_name'     => _x( 'Work Category', 'taxonomy single name', 'school-bug' ),
@@ -25,7 +25,7 @@ function school_bug_register_custom_post_types() {
         );
         register_taxonomy( 'work-category', array( 'staff' ), $args );
     }
-    add_action( 'init', 'school_bug_register_taxonomies' );
+    add_action( 'init', 'schoolbug_register_taxonomies' );
 
     // Register Staff Custom Post Type
     $labels = array(
@@ -53,10 +53,10 @@ function school_bug_register_custom_post_types() {
     );
     register_post_type( 'staff', $args );
 }
-add_action( 'init', 'school_bug_register_custom_post_types' );
+add_action( 'init', 'schoolbug_register_custom_post_types' );
 
 // Add Block Editor Template
-function school_bug_set_staff_template() {
+function schoolbug_set_staff_template() {
     $post_type_object = get_post_type_object( 'staff' );
     if ( $post_type_object ) {
         $post_type_object->template = array(
@@ -66,21 +66,21 @@ function school_bug_set_staff_template() {
         $post_type_object->template_lock = 'all'; // Locks the template
     }
 }
-add_action( 'init', 'school_bug_set_staff_template' );
+add_action( 'init', 'schoolbug_set_staff_template' );
 
 // Change Title Placeholder Text
-function school_bug_change_staff_title_placeholder( $title ) {
+function schoolbug_change_staff_title_placeholder( $title ) {
     $screen = get_current_screen();
     if ( 'staff' == $screen->post_type ) {
         $title = 'Add staff name';
     }
     return $title;
 }
-add_filter( 'enter_title_here', 'school_bug_change_staff_title_placeholder' );
+add_filter( 'enter_title_here', 'schoolbug_change_staff_title_placeholder' );
 
 // Flush Rewrite Rules on Theme Activation
-function school_bug_rewrite_flush() {
-    school_bug_register_custom_post_types();
+function schoolbug_rewrite_flush() {
+    schoolbug_register_custom_post_types();
     flush_rewrite_rules();
 }
-add_action('after_switch_theme', 'school_bug_rewrite_flush');
+add_action('after_switch_theme', 'schoolbug_rewrite_flush');
