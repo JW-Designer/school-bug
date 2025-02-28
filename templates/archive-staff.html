@@ -1,0 +1,60 @@
+<!-- wp:template-part {"slug":"header","area":"header","theme":"school-bug"} /-->
+
+<main class="staff-directory">
+    <div class="container">
+        <!-- wp:post-content /-->
+
+        <?php
+        $terms = get_terms( array(
+            'taxonomy' => 'work-category',
+            'hide_empty' => true,
+        ) );
+        
+        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) :
+            foreach ( $terms as $term ) : ?>
+                <section class="staff-category">
+                    <h2><?php echo esc_html( $term->name ); ?></h2>
+                    <div class="staff-list">
+                        <?php
+                        $staff_query = new WP_Query( array(
+                            'post_type' => 'staff',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'work-category',
+                                    'field' => 'term_id',
+                                    'terms' => $term->term_id,
+                                )
+                            ),
+                            'posts_per_page' => -1,
+                        ) );
+
+                        if ( $staff_query->have_posts() ) :
+                            while ( $staff_query->have_posts() ) : $staff_query->the_post(); ?>
+                                <article class="staff-member">
+                                    <?php if ( has_post_thumbnail() ) : ?>
+                                        <div class="staff-image">
+                                            <?php the_post_thumbnail( 'medium' ); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="staff-info">
+                                        <h3><?php the_title(); ?></h3>
+                                        <div class="staff-bio">
+                                            <?php the_content(); ?>
+                                        </div>
+                                    </div>
+                                </article>
+                            <?php endwhile;
+                            wp_reset_postdata();
+                        else :
+                            echo '<p>No staff members found in this category.</p>';
+                        endif;
+                        ?>
+                    </div>
+                </section>
+            <?php endforeach;
+        endif;
+        ?>
+    </div>
+</main>
+
+<!-- wp:template-part {"slug":"footer","area":"footer","theme":"school-bug"} /-->
