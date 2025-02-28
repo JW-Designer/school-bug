@@ -1,16 +1,193 @@
-/*
-Theme Name: school-bug
-Theme URI: 
-Author: 
-Author URI: 
-Description: 
-Requires at least: 6.7
-Tested up to: 6.7
-Requires PHP: 5.7
-Version: 
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: school-bug
-Tags: 
-*/
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Navigation */
+nav {
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;  /* Ensures footer sticks to bottom */
+    width: 100%;
+}
+
+/* Students Page Styles */
+.students-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 30px 0;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.student-card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student-card:hover {
+    transform: scale(1.05);
+}
+
+.student-thumbnail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.student-name {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.student-name a {
+    text-decoration: none;
+    color: #333;
+}
+
+.student-name a:hover {
+    color: #0073aa;
+}
+
+.student-bio {
+    font-size: 1em;
+    color: #666;
+    margin-top: 10px;
+}
+
+.student-card .student-info {
+    padding-top: 10px;
+}
+
+/* Global Layout */
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005f8d;
+}
+
+/* Form Elements */
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Portfolio Button Styles */
+.portfolio-button {
+    padding: 10px 20px;
+    background-color: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.portfolio-button:hover {
+    background-color: #005f8d;
+}
+
+/* Mobile and Responsive Design */
+@media (max-width: 768px) {
+    .students-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .student-card {
+        width: 80%;
+        margin: 10px 0;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    nav a {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .student-name {
+        font-size: 1em;
+    }
+
+    .student-bio {
+        font-size: 0.9em;
+    }
+}

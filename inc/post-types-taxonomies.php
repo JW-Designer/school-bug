@@ -1,7 +1,7 @@
 <?php
-function school_bug_register_custom_post_types() {
-    // Register Work Category Taxonomy
-    function school_bug_register_taxonomies() {
+if ( ! function_exists( 'school_bug_register_taxonomies_and_post_types' ) ) {
+    function school_bug_register_taxonomies_and_post_types() {
+        // Register Work Category Taxonomy
         $labels = array(
             'name'              => _x( 'Work Categories', 'taxonomy general name', 'school-bug' ),
             'singular_name'     => _x( 'Work Category', 'taxonomy single name', 'school-bug' ),
@@ -24,63 +24,83 @@ function school_bug_register_custom_post_types() {
             'rewrite'           => array( 'slug' => 'work-category' ),
         );
         register_taxonomy( 'work-category', array( 'staff' ), $args );
-    }
-    add_action( 'init', 'school_bug_register_taxonomies' );
 
-    // Register Staff Custom Post Type
-    $labels = array(
-        'name'               => _x( 'Staff', 'Post Type General Name', 'school-bug' ),
-        'singular_name'      => _x( 'Staff Member', 'Post Type Singular Name', 'school-bug' ),
-        'menu_name'          => __( 'Staff', 'school-bug' ),
-        'add_new_item'       => __( 'Add New Staff Member', 'school-bug' ),
-        'edit_item'          => __( 'Edit Staff Member', 'school-bug' ),
-        'view_item'          => __( 'View Staff Member', 'school-bug' ),
-        'search_items'       => __( 'Search Staff', 'school-bug' ),
-        'not_found'          => __( 'No staff found', 'school-bug' ),
-        'not_found_in_trash' => __( 'No staff found in Trash', 'school-bug' ),
-    );
-    $args = array(
-        'label'              => __( 'Staff', 'school-bug' ),
-        'description'        => __( 'A custom post type for staff members.', 'school-bug' ),
-        'labels'             => $labels,
-        'menu_icon'          => 'dashicons-groups',
-        'supports'           => array( 'title', 'editor', 'thumbnail' ),
-        'public'             => true,
-        'show_in_rest'       => true,
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'rewrite'            => array( 'slug' => 'staff' ),
-    );
-    register_post_type( 'staff', $args );
-}
-add_action( 'init', 'school_bug_register_custom_post_types' );
-
-// Add Block Editor Template
-function school_bug_set_staff_template() {
-    $post_type_object = get_post_type_object( 'staff' );
-    if ( $post_type_object ) {
-        $post_type_object->template = array(
-            array( 'core/paragraph', array( 'placeholder' => 'Enter job title...' ) ),
-            array( 'core/paragraph', array( 'placeholder' => 'Enter email address...' ) ),
+        // Register Student Role Taxonomy
+        $student_labels = array(
+            'name'              => _x( 'Student Roles', 'taxonomy general name', 'school-bug' ),
+            'singular_name'     => _x( 'Student Role', 'taxonomy singular name', 'school-bug' ),
+            'search_items'      => __( 'Search Student Roles', 'school-bug' ),
+            'all_items'         => __( 'All Student Roles', 'school-bug' ),
+            'edit_item'         => __( 'Edit Student Role', 'school-bug' ),
+            'update_item'       => __( 'Update Student Role', 'school-bug' ),
+            'add_new_item'      => __( 'Add New Student Role', 'school-bug' ),
+            'new_item_name'     => __( 'New Student Role Name', 'school-bug' ),
+            'menu_name'         => __( 'Student Roles', 'school-bug' ),
         );
-        $post_type_object->template_lock = 'all'; // Locks the template
-    }
-}
-add_action( 'init', 'school_bug_set_staff_template' );
+        $student_args = array(
+            'hierarchical'      => true,
+            'labels'            => $student_labels,
+            'show_ui'           => true,
+            'show_in_menu'      => true,
+            'show_in_rest'      => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'rewrite'           => array( 'slug' => 'student-role' ),
+        );
+        register_taxonomy( 'student-role', array( 'student' ), $student_args );
 
-// Change Title Placeholder Text
-function school_bug_change_staff_title_placeholder( $title ) {
-    $screen = get_current_screen();
-    if ( 'staff' == $screen->post_type ) {
-        $title = 'Add staff name';
-    }
-    return $title;
-}
-add_filter( 'enter_title_here', 'school_bug_change_staff_title_placeholder' );
+        // Register Staff Custom Post Type
+        $staff_labels = array(
+            'name'               => _x( 'Staff', 'Post Type General Name', 'school-bug' ),
+            'singular_name'      => _x( 'Staff Member', 'Post Type Singular Name', 'school-bug' ),
+            'menu_name'          => __( 'Staff', 'school-bug' ),
+            'add_new_item'       => __( 'Add New Staff Member', 'school-bug' ),
+            'edit_item'          => __( 'Edit Staff Member', 'school-bug' ),
+            'view_item'          => __( 'View Staff Member', 'school-bug' ),
+            'search_items'       => __( 'Search Staff', 'school-bug' ),
+            'not_found'          => __( 'No staff found', 'school-bug' ),
+            'not_found_in_trash' => __( 'No staff found in Trash', 'school-bug' ),
+        );
+        $staff_args = array(
+            'label'              => __( 'Staff', 'school-bug' ),
+            'description'        => __( 'A custom post type for staff members.', 'school-bug' ),
+            'labels'             => $staff_labels,
+            'menu_icon'          => 'dashicons-groups',
+            'supports'           => array( 'title', 'editor', 'thumbnail' ),
+            'public'             => true,
+            'show_in_rest'       => true,
+            'has_archive'        => true,
+            'hierarchical'       => false,
+            'rewrite'            => array( 'slug' => 'staff' ),
+        );
+        register_post_type( 'staff', $staff_args );
 
-// Flush Rewrite Rules on Theme Activation
-function school_bug_rewrite_flush() {
-    school_bug_register_custom_post_types();
-    flush_rewrite_rules();
+        // Register Student Custom Post Type
+        $student_labels = array(
+            'name'               => _x( 'Students', 'Post Type General Name', 'school-bug' ),
+            'singular_name'      => _x( 'Student', 'Post Type Singular Name', 'school-bug' ),
+            'menu_name'          => __( 'Students', 'school-bug' ),
+            'add_new_item'       => __( 'Add New Student', 'school-bug' ),
+            'edit_item'          => __( 'Edit Student', 'school-bug' ),
+            'view_item'          => __( 'View Student', 'school-bug' ),
+            'search_items'       => __( 'Search Students', 'school-bug' ),
+            'not_found'          => __( 'No students found', 'school-bug' ),
+            'not_found_in_trash' => __( 'No students found in Trash', 'school-bug' ),
+        );
+        $student_args = array(
+            'label'              => __( 'Students', 'school-bug' ),
+            'description'        => __( 'A custom post type for students.', 'school-bug' ),
+            'labels'             => $student_labels,
+            'menu_icon'          => 'dashicons-welcome-learn-more',
+            'supports'           => array( 'title', 'editor', 'thumbnail' ),
+            'public'             => true,
+            'show_in_rest'       => true,
+            'has_archive'        => true,
+            'hierarchical'       => false,
+            'rewrite'            => array( 'slug' => 'students' ),
+        );
+        register_post_type( 'student', $student_args );
+    }
+    add_action( 'init', 'school_bug_register_taxonomies_and_post_types' );
 }
-add_action('after_switch_theme', 'school_bug_rewrite_flush');
+?>
