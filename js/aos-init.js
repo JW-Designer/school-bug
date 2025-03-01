@@ -1,13 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Initialize AOS
+// aos-init.js
+document.addEventListener('DOMContentLoaded', function () {
     AOS.init({
-        duration: 1000, // Animation duration in milliseconds
-        easing: "ease-in-out", // Easing function for animations
-        once: true, // Animation happens only once when scrolled into view
-        mirror: false, // Whether elements should animate out when scrolling past them
-        anchorPlacement: "top-bottom", // Defines which part of the element should be in view to trigger animation
+        duration: 800, // Animation duration
+        offset: 120,   // Offset (in px) from the original trigger point
+        easing: 'ease-in-out', // Easing type
+        once: true, // Whether animation should happen only once
     });
-
-    // Debugging: Log AOS initialization to the console
-    console.log("AOS initialized successfully");
 });

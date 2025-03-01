@@ -3,18 +3,17 @@
 	"apiVersion": 3,
 	"name": "fwd-blocks/aos",
 	"version": "0.1.0",
-	"title": "AOS Block",
+	"title": "aos",
 	"category": "widgets",
 	"icon": "smiley",
-	"description": "Animate elements on scroll using AOS.",
+	"description": "animate on scroll",
 	"example": {},
 	"supports": {
 		"html": false
 	},
 	"textdomain": "aos",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./editor.css",
-	"style": "file:./style.css",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js"
-	
 }
