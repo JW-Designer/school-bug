@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "fwd-blocks/aos",
+    "version": "0.1.0",
+    "title": "AOS Block",
+    "category": "widgets",
+    "icon": "smiley",
+    "description": "Animate On Scroll Block",
+    "supports": {
+      "html": false
+    },
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/editor.css",
+    "style": "file:./build/style.css",
+    "viewScript": "file:./src/view.js"
+  }
+  

@@ -1,11 +1,11 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+const Save = (props) => {
+    const { animation } = props.attributes;
 
-export default function save({ attributes }) {
-	const { animation } = attributes;
+    return (
+        <div data-aos={animation}>
+            <InnerBlocks.Content />
+        </div>
+    );
+};
 
-	return (
-		<div {...useBlockProps.save({ className: 'aos-block' })} data-aos={animation}>
-			<InnerBlocks.Content />
-		</div>
-	);
-}
+export default Save;
