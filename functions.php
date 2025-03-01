@@ -162,8 +162,23 @@ if (!function_exists('school_bug_rewrite_flush')) {
 }
 
 // Register the custom AOS block
-function register_aos_block() {
-    register_block_type(__DIR__ . '/aos');
+
+// function register_aos_block() {
+//     if (function_exists('register_block_type')) {
+//         error_log('Registering AOS Block');
+//         register_block_type(__DIR__ . '/aos');
+//     } else {
+//         error_log('register_block_type function does not exist');
+//     }
+// }
+// add_action('init', 'register_aos_block');
+
+function schoolbug_aos_block_register_block() {
+    // Register the block
+    register_block_type(__DIR__ . '/build', array(
+        'render_callback' => 'schoolbug_aos_block_render_callback',
+    ));
 }
-add_action('init', 'register_aos_block');
+add_action('init', 'schoolbug_aos_block_register_block');
+
 ?>

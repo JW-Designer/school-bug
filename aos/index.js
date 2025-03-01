@@ -3,10 +3,6 @@ import { __ } from '@wordpress/i18n'; // Import the __ function for translations
 import Edit from './aos-block.js'; // Import the edit component
 import save from './save'; // Import the save component
 
-// Import the CSS/SCSS file
-import './aos/style.scss'; // If using SCSS
-// or
-// import './aos/style.css'; // If using plain CSS
 
 // Register the block
 registerBlockType('school-bug/aos-block', {
