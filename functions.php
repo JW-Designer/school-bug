@@ -175,4 +175,18 @@ if ( ! function_exists( 'school_bug_rewrite_flush' ) ) {
     }
     add_action('after_switch_theme', 'school_bug_rewrite_flush');
 }
+
+function enqueue_aos_scripts() {
+    // Enqueue AOS CSS
+    wp_enqueue_style('aos-css', 'https://unpkg.com/aos@2.3.1/dist/aos.css', array(), '2.3.1');
+
+    // Enqueue AOS JS
+    wp_enqueue_script('aos-js', 'https://unpkg.com/aos@2.3.1/dist/aos.js', array('jquery'), '2.3.1', true);
+
+    // Enqueue custom JS to initialize AOS
+    wp_enqueue_script('aos-init', get_template_directory_uri() . '/js/aos-init.js', array('aos-js'), '1.0', true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
+
+
 ?>
