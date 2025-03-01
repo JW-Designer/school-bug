@@ -1,19 +1,20 @@
 {
-    "apiVersion": 2,
-    "name": "fwd-blocks/aos-block",
-    "title": "AOS Block",
-    "category": "widgets",
-    "icon": "smiley",
-    "description": "A block that applies AOS (Animate on Scroll) animations.",
-    "supports": {
-        "html": false
-    },
-    "attributes": {
-        "animation": {
-            "type": "string",
-            "default": "fade-up"
-        }
-    },
-    "editorScript": "file:./index.js",
-    "style": "file:./style.css"
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "fwd-blocks/aos",
+	"version": "0.1.0",
+	"title": "AOS Block",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Animate elements on scroll using AOS.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "aos",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"viewScript": "file:./view.js"
+	
 }
