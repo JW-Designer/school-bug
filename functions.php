@@ -103,4 +103,18 @@ if ( ! function_exists( 'school_bug_register_taxonomies_and_post_types' ) ) {
     }
     add_action( 'init', 'school_bug_register_taxonomies_and_post_types' );
 }
+
+function enqueue_lightgallery() {
+   
+        // Enqueue Free lightGallery CSS
+        wp_enqueue_style('lightgallery-css', get_template_directory_uri() . '/assets/css/lightgallery.css', array(), '1.10.0');
+
+        // Enqueue Free lightGallery JS
+        wp_enqueue_script('lightgallery-js', get_template_directory_uri() . '/assets/js/lightgallery.min.js', array('jquery'), '1.10.0', true);
+
+        // Enqueue initialization script
+        wp_enqueue_script('lightgallery-init', get_template_directory_uri() . '/assets/js/lightgallery-init.js', array('lightgallery-js'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_lightgallery');
+
 ?>

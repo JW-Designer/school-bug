@@ -1,60 +1,37 @@
-<!-- wp:template-part {"slug":"header","area":"header","theme":"school-bug"} /-->
+<!-- wp:template-part {"slug":"header","area":"header"} /-->
 
-<main class="staff-directory">
-    <div class="container">
-        <!-- wp:post-content /-->
+<!-- wp:columns -->
+<div class="wp-block-columns"><!-- wp:column {"width":"25%"} -->
+<div class="wp-block-column" style="flex-basis:25%"></div>
+<!-- /wp:column -->
 
-        <?php
-        $terms = get_terms( array(
-            'taxonomy' => 'work-category',
-            'hide_empty' => true,
-        ) );
-        
-        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) :
-            foreach ( $terms as $term ) : ?>
-                <section class="staff-category">
-                    <h2><?php echo esc_html( $term->name ); ?></h2>
-                    <div class="staff-list">
-                        <?php
-                        $staff_query = new WP_Query( array(
-                            'post_type' => 'staff',
-                            'tax_query' => array(
-                                array(
-                                    'taxonomy' => 'work-category',
-                                    'field' => 'term_id',
-                                    'terms' => $term->term_id,
-                                )
-                            ),
-                            'posts_per_page' => -1,
-                        ) );
+<!-- wp:column {"width":"50%"} -->
+<div class="wp-block-column" style="flex-basis:50%"><!-- wp:paragraph -->
+<p>Our experienced faculty brings years of hands-on experience in web development and design, ensuring that our students are equipped with cutting-edge skills and knowledge. From user experience designers to back-end engineers, our team covers every facet of web development and design to guide you through your learning journey. The administrative staff is here to provide seamless support, helping you focus on what matters most—mastering the art of coding and creating exceptional digital experiences. Explore below to meet the people who make us a thriving hub for innovation and growth!</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column -->
 
-                        if ( $staff_query->have_posts() ) :
-                            while ( $staff_query->have_posts() ) : $staff_query->the_post(); ?>
-                                <article class="staff-member">
-                                    <?php if ( has_post_thumbnail() ) : ?>
-                                        <div class="staff-image">
-                                            <?php the_post_thumbnail( 'medium' ); ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="staff-info">
-                                        <h3><?php the_title(); ?></h3>
-                                        <div class="staff-bio">
-                                            <?php the_content(); ?>
-                                        </div>
-                                    </div>
-                                </article>
-                            <?php endwhile;
-                            wp_reset_postdata();
-                        else :
-                            echo '<p>No staff members found in this category.</p>';
-                        endif;
-                        ?>
-                    </div>
-                </section>
-            <?php endforeach;
-        endif;
-        ?>
-    </div>
-</main>
+<!-- wp:column {"width":"25%"} -->
+<div class="wp-block-column" style="flex-basis:25%"></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->
 
-<!-- wp:template-part {"slug":"footer","area":"footer","theme":"school-bug"} /-->
+<!-- wp:query {"queryId":46,"query":{"perPage":10,"pages":0,"offset":0,"postType":"staff","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":null,"parents":[],"format":[]},"layout":{"type":"constrained"}} -->
+<div class="wp-block-query"><!-- wp:post-template {"style":{"spacing":{"blockGap":"var:preset|spacing|50"},"elements":{"link":{"color":{"text":"var:preset|color|black"}}}},"textColor":"black","layout":{"type":"grid","columnCount":2}} -->
+<!-- wp:post-featured-image {"aspectRatio":"1","width":"","height":"","sizeSlug":"medium","style":{"border":{"radius":"200px"}}} /-->
+
+<!-- wp:post-terms {"term":"work-category"} /-->
+
+<!-- wp:post-title /-->
+
+<!-- wp:post-content /-->
+<!-- /wp:post-template -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>No staff members found.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query -->
+
+<!-- wp:template-part {"slug":"footer","area":"footer"} /-->
